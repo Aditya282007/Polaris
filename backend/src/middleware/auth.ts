@@ -32,7 +32,6 @@ export const authenticateToken = (req: Request, res: Response, next: Function) =
       return res.status(403).json({ message: "Invalid or expired token." });
     }
 
-    // @ts-expect-error - user property added by auth middleware
     req.user = user;
     next();
   });
