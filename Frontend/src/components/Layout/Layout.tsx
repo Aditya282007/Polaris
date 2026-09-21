@@ -24,10 +24,10 @@ const AURORA_GRADIENT = 'linear-gradient(135deg, #3EE6C4 0%, #5FB8E0 35%, #8A7FE
 function CursorGlow() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const targetPos = useRef({ x: 0, y: 0 });
-  const rafRef = useRef();
+  const rafRef = useRef<number>();
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       targetPos.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -43,7 +43,9 @@ function CursorGlow() {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(rafRef.current);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, []);
 
