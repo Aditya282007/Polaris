@@ -6,13 +6,13 @@ export interface UserPayload {
   role: string;
 }
 
-// declare global {
-  //   namespace Express {
-  //     interface Request {
-  //       user?: any;
-  //     }
-  //   }
-// }
+declare global {
+    namespace Express {
+      interface Request {
+        user?: any;
+      }
+    }
+}
 
 export const authenticateToken = (req: Request, res: Response, next: Function) => {
   const authHeader = req.headers.authorization as string | undefined;
